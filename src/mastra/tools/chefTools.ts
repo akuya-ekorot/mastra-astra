@@ -2,10 +2,8 @@ import { createTool } from "@mastra/core";
 import { z } from "zod";
 import { embedMany } from "ai";
 import { createVectorQueryTool } from "@mastra/rag";
-import { embedder } from "../shared";
-import { model } from "../shared";
+import { embedder, model } from "../shared";
 
-// Ingredient type for type safety
 export type Ingredient = {
 	name: string;
 	availability: "in_stock" | "out_of_stock";
@@ -41,13 +39,10 @@ export const addIngredientTool = createTool({
 			return { error: "Vector store or embedder not found" };
 		}
 
-		// Prepare JSON strings for embedding
-		const ingredientJsons = ingredients.map((ing) => ing.name);
-
 		// Embed all ingredients at once
 		const embeddings = await embedMany({
 			model: embedder,
-			values: ingredientJsons,
+			values: ingredients.map((ing) => ing.name),
 		});
 
 		const indexes = await vector.listIndexes();
@@ -55,7 +50,7 @@ export const addIngredientTool = createTool({
 		if (!indexes.includes("ingredients")) {
 			await vector.createIndex({
 				indexName: "ingredients",
-				dimension: 1024,
+				dimension: 1024, // should match the dimensions of the embedding model used
 			});
 		}
 
