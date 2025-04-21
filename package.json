@@ -1,0 +1,29 @@
+{
+  "name": "mastra-astra",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "mastra dev"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "module",
+  "dependencies": {
+    "@ai-sdk/cohere": "^1.2.9",
+    "@mastra/astra": "^0.2.10",
+    "@mastra/core": "^0.8.3",
+    "@mastra/memory": "^0.2.10",
+    "@mastra/rag": "^0.1.18",
+    "@openrouter/ai-sdk-provider": "^0.4.5",
+    "mastra": "^0.4.9",
+    "zod": "^3.24.3"
+  },
+  "devDependencies": {
+    "@types/node": "^22.14.1",
+    "tsx": "^4.19.3",
+    "typescript": "^5.8.3"
+  }
+}
