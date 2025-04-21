@@ -8,10 +8,8 @@ import { model } from "../shared";
 // Ingredient type for type safety
 export type Ingredient = {
 	name: string;
-	availability: "in_stock" | "out_of_stock" | "seasonal";
+	availability: "in_stock" | "out_of_stock";
 	tags: string[];
-	quantityAvailable: number;
-	dietTypes: string[];
 };
 
 export const addIngredientTool = createTool({
@@ -24,15 +22,9 @@ export const addIngredientTool = createTool({
 					z.object({
 						name: z.string().describe("Name of the ingredient"),
 						availability: z
-							.enum(["in_stock", "out_of_stock", "seasonal"])
+							.enum(["in_stock", "out_of_stock"])
 							.describe("Availability status"),
 						tags: z.array(z.string()).describe("Tags for the ingredient"),
-						quantityAvailable: z
-							.number()
-							.describe("Quantity available (grams or pieces)"),
-						dietTypes: z
-							.array(z.string())
-							.describe("Diet types (e.g., vegan, keto, etc.)"),
 					}),
 				)
 				.describe("List of ingredients to add"),
